@@ -25,7 +25,9 @@ pub trait Sequence<T: Copy + Ord> {
 
     fn enumerate(&self) -> Self::Sequence<(usize, T)>;
 
-    // Modifier Functions
+    // Modifier functions
+    fn swap(&mut self, i: usize, j: usize);
+
     fn reverse(&mut self);
 
     fn append(&mut self, other: Self);

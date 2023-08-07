@@ -1,5 +1,6 @@
 use super::Sequence;
 
+#[non_exhaustive]
 #[derive(Debug, Default, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub struct ArraySequence<T> {
     vec: Vec<T>,
@@ -8,6 +9,7 @@ pub struct ArraySequence<T> {
 impl<T: Copy + Ord> Sequence<T> for ArraySequence<T> {
     type Sequence<U> = ArraySequence<U>;
 
+    // Creator functions
     fn singleton(x: T) -> Self {
         Self { vec: vec![x] }
     }
@@ -21,6 +23,7 @@ impl<T: Copy + Ord> Sequence<T> for ArraySequence<T> {
         }
     }
 
+    // Observer functions
     fn nth(&self, i: usize) -> &T {
         &self.vec[i]
     }
@@ -54,6 +57,11 @@ impl<T: Copy + Ord> Sequence<T> for ArraySequence<T> {
         ArraySequence {
             vec: self.vec.iter().copied().enumerate().collect(),
         }
+    }
+
+    // Modifier functions
+    fn swap(&mut self, i: usize, j: usize) {
+        self.vec.swap(i, j)
     }
 
     fn reverse(&mut self) {
@@ -171,6 +179,7 @@ impl<T: Copy + Ord> Sequence<T> for ArraySequence<T> {
         }
     }
 
+    // Consumer functions
     fn split_mid(mut self, mid: usize) -> (Self, Self)
     where
         Self: Sized,
