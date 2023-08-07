@@ -67,7 +67,7 @@ pub trait Sequence<T: Copy + Ord> {
         Reducer: Fn(T, T) -> T;
 
     // Consumer functions
-    fn split_mid(self, mid: usize) -> (Self, Self)
+    fn split_at(self, mid: usize) -> (Self, Self)
     where
         Self: Sized;
 

@@ -180,7 +180,7 @@ impl<T: Copy + Ord> Sequence<T> for ArraySequence<T> {
     }
 
     // Consumer functions
-    fn split_mid(mut self, mid: usize) -> (Self, Self)
+    fn split_at(mut self, mid: usize) -> (Self, Self)
     where
         Self: Sized,
     {
