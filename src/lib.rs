@@ -9,7 +9,7 @@ pub trait Sequence<T: Copy + Ord> {
         Tabulator: Fn(usize) -> T;
 
     // Observer functions
-    fn nth(&self, index: usize) -> &T;
+    fn nth(&self, index: usize) -> T;
 
     fn length(&self) -> usize;
 

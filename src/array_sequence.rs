@@ -24,8 +24,8 @@ impl<T: Copy + Ord> Sequence<T> for ArraySequence<T> {
     }
 
     // Observer functions
-    fn nth(&self, i: usize) -> &T {
-        &self.vec[i]
+    fn nth(&self, i: usize) -> T {
+        self.vec[i]
     }
 
     fn length(&self) -> usize {
