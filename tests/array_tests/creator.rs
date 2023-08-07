@@ -77,3 +77,36 @@ fn tabulate_struct() {
         .into()
     )
 }
+
+#[test]
+fn tabulate_ref() {
+    let hello_str = "Hello World";
+    assert_eq!(
+        ArraySequence::tabulate(6, |i| &hello_str[0..(i * 2)]),
+        vec!["", "He", "Hell", "Hello ", "Hello Wo", "Hello Worl",].into()
+    )
+}
+
+#[test]
+fn tabulate_struct_ref() {
+    let hello_str = "Hello World";
+    #[derive(Default, Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+    struct TestStruct<'a> {
+        s: &'a str,
+        r: Option<char>,
+    }
+    assert_eq!(
+        ArraySequence::tabulate(2, |i| TestStruct {
+            s: &hello_str[i + 2..i + 5],
+            r: std::char::from_digit((i * 1000) as u32, 10)
+        }),
+        vec![
+            TestStruct {
+                s: "llo",
+                r: Some('0')
+            },
+            TestStruct { s: "lo ", r: None }
+        ]
+        .into()
+    )
+}
